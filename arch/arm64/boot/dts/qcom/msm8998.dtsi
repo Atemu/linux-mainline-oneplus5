@@ -2016,10 +2016,8 @@
 			interrupt-controller;
 			#interrupt-cells = <1>;
 
-/*
 			iommus = <&mmss_smmu 0>,
 			         <&mmss_smmu 1>;
-*/
 
 			status = "disabled";
 
@@ -2199,7 +2197,6 @@
 			};
 		};
 
-/*
 		mmss_smmu: arm,smmu@cd00000 {
 			compatible = "qcom,msm8998-smmu-v2", "qcom,smmu-v2";
 			reg = <0x0cd00000 0x40000>;
@@ -2234,7 +2231,6 @@
 			         <&mmcc BIMC_SMMU_AXI_CLK>;
 			clock-names = "noc", "iface", "bus";
 		};
-*/
 
 		remoteproc_adsp: remoteproc@17300000 {
 			compatible = "qcom,msm8998-adsp-pas";
