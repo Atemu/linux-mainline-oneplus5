@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-// Copyright (c) 2020 FIXME
-// Generated with linux-mdss-dsi-panel-driver-generator from vendor device tree:
-//   Copyright (c) 2013, The Linux Foundation. All rights reserved. (FIXME)
+// Copyright (c) 2020, The Linux Foundation. All rights reserved.
 
 #include <linux/backlight.h>
 #include <linux/delay.h>
@@ -22,8 +20,7 @@ struct s6e3fa5 {
 	bool prepared;
 };
 
-static inline
-struct s6e3fa5 *to_s6e3fa5(struct drm_panel *panel)
+static inline struct s6e3fa5 *panel_to_s6e3fa5(struct drm_panel *panel)
 {
 	return container_of(panel, struct s6e3fa5, panel);
 }
@@ -115,7 +112,7 @@ static int s6e3fa5_off(struct s6e3fa5 *ctx)
 
 static int s6e3fa5_prepare(struct drm_panel *panel)
 {
-	struct s6e3fa5 *ctx = to_s6e3fa5(panel);
+	struct s6e3fa5 *ctx = panel_to_s6e3fa5(panel);
 	struct device *dev = &ctx->dsi->dev;
 	int ret;
 
@@ -137,7 +134,7 @@ static int s6e3fa5_prepare(struct drm_panel *panel)
 
 static int s6e3fa5_unprepare(struct drm_panel *panel)
 {
-	struct s6e3fa5 *ctx = to_s6e3fa5(panel);
+	struct s6e3fa5 *ctx = panel_to_s6e3fa5(panel);
 	struct device *dev = &ctx->dsi->dev;
 	int ret;
 
@@ -170,7 +167,7 @@ static const struct drm_display_mode s6e3fa5_mode = {
 };
 
 static int s6e3fa5_get_modes(struct drm_panel *panel,
-				     struct drm_connector *connector)
+			     struct drm_connector *connector)
 {
 	struct drm_display_mode *mode;
 
@@ -335,6 +332,6 @@ static struct mipi_dsi_driver s6e3fa5_driver = {
 };
 module_mipi_dsi_driver(s6e3fa5_driver);
 
-MODULE_AUTHOR("linux-mdss-dsi-panel-driver-generator <fix@me>"); // FIXME
-MODULE_DESCRIPTION("DRM driver for samsung s6e3fa5 1080p cmd mode dsi panel");
+MODULE_AUTHOR("Jami Kettunen <jami.kettunen@protonmail.com>");
+MODULE_DESCRIPTION("DRM driver for Samsung S6E3FA5 FHD AMOLED LCD MIPI-DSI based command mode panel");
 MODULE_LICENSE("GPL v2");
