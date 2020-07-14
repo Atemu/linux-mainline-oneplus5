@@ -499,9 +499,6 @@ KBUILD_CFLAGS   := -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs \
 		   -Wno-format-security \
 		   -std=gnu89
 
-# Optimize build results for MSM8998 (Snapdragon 835)
-KBUILD_CFLAGS   += -mcpu=cortex-a73.cortex-a53+crc+crypto
-
 # Kryo 280 doesn't need 835769/843419 erratum fixes.
 # Some toolchains enable those fixes automatically, so opt-out.
 KBUILD_CFLAGS   += $(call cc-option, -mno-fix-cortex-a53-835769)
