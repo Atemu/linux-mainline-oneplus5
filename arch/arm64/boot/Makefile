@@ -37,7 +37,7 @@ $(obj)/Image.lzo: $(obj)/Image FORCE
 	$(call if_changed,lzo)
 
 $(obj)/Image.gz-dtb: $(obj)/Image.gz $(obj)/dts/qcom/msm8998-oneplus-cheeseburger.dtb FORCE
-	$(call if_changed,cat)
+	$(call cat)
 
 install:
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh $(KERNELRELEASE) \
