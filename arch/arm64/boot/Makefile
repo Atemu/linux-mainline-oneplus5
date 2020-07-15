@@ -45,7 +45,7 @@ $(obj)/Image.lzma: $(obj)/Image FORCE
 $(obj)/Image.lzo: $(obj)/Image FORCE
 	$(call if_changed,lzo)
 
-$(obj)/Image.gz-dtb: $(obj)/Image.gz $(DTB_OBJS) FORCE
+$(obj)/Image.gz-dtb: $(obj)/Image.gz $(obj)/dts/qcom/msm8998-oneplus-cheeseburger.dtb FORCE
 	$(call if_changed,cat)
 
 install: $(obj)/Image
