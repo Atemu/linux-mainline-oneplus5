@@ -14,24 +14,15 @@
 # Based on the ia64 boot/Makefile.
 #
 
-targets := Image Image.gz
+OBJCOPYFLAGS_Image :=-O binary -R .note -R .note.gnu.build-id -R .comment -S
 
-DTB_NAMES := $(subst $\",,$(CONFIG_BUILD_ARM64_APPENDED_DTB_IMAGE_NAMES))
-ifneq ($(DTB_NAMES),)
-DTB_LIST := $(addsuffix .dtb,$(DTB_NAMES))
-DTB_OBJS := $(addprefix $(obj)/dts/,$(DTB_LIST))
-else
-DTB_OBJS := $(shell find -L $(obj)/dts/ -name \*.dtb)
-endif
+targets := Image Image.bz2 Image.gz Image.lz4 Image.lzma Image.lzo
 
 $(obj)/Image: vmlinux FORCE
 	$(call if_changed,objcopy)
 
 $(obj)/Image.bz2: $(obj)/Image FORCE
 	$(call if_changed,bzip2)
-
-$(obj)/Image-dtb: $(obj)/Image $(DTB_OBJS) FORCE
-	$(call if_changed,cat)
 
 $(obj)/Image.gz: $(obj)/Image FORCE
 	$(call if_changed,gzip)
@@ -45,13 +36,10 @@ $(obj)/Image.lzma: $(obj)/Image FORCE
 $(obj)/Image.lzo: $(obj)/Image FORCE
 	$(call if_changed,lzo)
 
-$(obj)/Image.gz-dtb: $(obj)/Image.gz $(obj)/dts/qcom/msm8998-oneplus-cheeseburger.dtb FORCE
-	$(call if_changed,cat)
-
-install: $(obj)/Image
+install:
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh $(KERNELRELEASE) \
 	$(obj)/Image System.map "$(INSTALL_PATH)"
 
-zinstall: $(obj)/Image.gz
+zinstall:
 	$(CONFIG_SHELL) $(srctree)/$(src)/install.sh $(KERNELRELEASE) \
 	$(obj)/Image.gz System.map "$(INSTALL_PATH)"
